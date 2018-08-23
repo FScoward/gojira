@@ -1,3 +1,6 @@
+# API TOKENS
+https://confluence.atlassian.com/cloud/api-tokens-938839638.html
+
 # JIRA Software REST API
 https://developer.atlassian.com/cloud/jira/software/rest/#api-board-get
 
