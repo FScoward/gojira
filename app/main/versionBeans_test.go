@@ -45,13 +45,16 @@ func TestParseVersionBeans(t *testing.T) {
 	}
 
 	expect := []VersionBean{
-		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10000"},
-		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10010"},
+		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10000", "10000"},
+		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10010", "10010"},
 	}
 
 	for i, _ := range versionBeans {
 		if versionBeans[i].Self != expect[i].Self {
 			t.Error("error", versionBeans[i].Self, expect[i].Self)
+		}
+		if versionBeans[i].Id != expect[i].Id {
+			t.Error("error", versionBeans[i].Id, expect[i].Id)
 		}
 	}
 }
