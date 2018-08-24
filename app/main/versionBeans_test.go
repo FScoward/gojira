@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"reflect"
 	"testing"
 )
 
@@ -45,16 +46,35 @@ func TestParseVersionBeans(t *testing.T) {
 	}
 
 	expect := []VersionBean{
-		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10000", "10000"},
-		VersionBean{"http://your-domain.atlassian.net/rest/api/2/version/10010", "10010"},
+		VersionBean{
+			"http://your-domain.atlassian.net/rest/api/2/version/10000",
+			"10000",
+			"An excellent version",
+			"New Version 1",
+			false,
+			true,
+			"2010-07-06",
+			true,
+			"6/Jul/2010",
+			10000,
+		},
+		VersionBean{
+			"http://your-domain.atlassian.net/rest/api/2/version/10010",
+			"10010",
+			"Minor Bugfix version",
+			"Next Version",
+			false,
+			false,
+			"",
+			false,
+			"",
+			10000,
+		},
 	}
 
 	for i, _ := range versionBeans {
-		if versionBeans[i].Self != expect[i].Self {
-			t.Error("error", versionBeans[i].Self, expect[i].Self)
-		}
-		if versionBeans[i].Id != expect[i].Id {
-			t.Error("error", versionBeans[i].Id, expect[i].Id)
+		if !reflect.DeepEqual(expect, versionBeans) {
+			t.Errorf("index: %v, actual: %v, expect: %v", i, versionBeans, expect)
 		}
 	}
 }
